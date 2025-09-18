@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->foreignId('account_id')->constrained();
             $table->foreignId('member_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('tag_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamp('time')->useCurrent();
             $table->text('notes')->nullable();
             $table->timestamps();

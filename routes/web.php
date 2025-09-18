@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TagController;
 
 
 Route::get('/', function () {
