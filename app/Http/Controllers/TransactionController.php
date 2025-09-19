@@ -8,26 +8,27 @@ use App\Models\Category;
 use App\Models\Account;
 use App\Models\Member;
 use App\Models\Tag;
-
+use Intertia\Inertia;
+use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
     // 列出所有交易记录
-    public function index(TransactionRequest $request)
+    public function index(Request $request)
     {
         $transactions = Transaction::with(['category', 'account', 'member', 'tag'])
             ->where('user_id', $request->user())->paginate(15)->withQueryString();
-
-        return view('transactions.index', compact('transactions'));
+        // dump("transactions.index");
+        return view('transactions.index', compact('transactions'))->with('name','nihao');
     }
 
     public function create()
     {
-        $catagories = Category::all();
+        $categories = Category::all();
         $accounts = Account::all();
         $members = Member::all();
         $tags = Tag::all(); 
-        return view('transactions.create',compact('catagories','accounts','members','tags'));
+        return view('transactions.create',compact('categories','accounts','members','tags'));
     }
     public function store(TransactionRequest $request)
     {
@@ -37,6 +38,11 @@ class TransactionController extends Controller
 
         return redirect()->route('transactions.index')->with('success', '交易记录创建成功');
     }
+    public function show(Transaction $transaction)
+    {
+        return view('transactions.show', compact('transaction'));
+    }
+
     public function edit(Transaction $transaction)
     {
         $catagories = Category::all();
