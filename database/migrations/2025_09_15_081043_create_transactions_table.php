@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('member_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('tag_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamp('time')->useCurrent();
-            $table->text('notes')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             
             $table->index(['user_id', 'type', 'time']);

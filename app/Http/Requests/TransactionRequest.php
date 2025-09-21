@@ -29,7 +29,7 @@ class TransactionRequest extends FormRequest
             'member_id' => 'nullable|exists:members,id',
             'tag_id' => 'nullable|exists:tags,id',
             'time' => 'required|date',
-            'notes' => 'nullable|string|max:1000',
+            'note' => 'nullable|string|max:1000',
         ];
     }
    

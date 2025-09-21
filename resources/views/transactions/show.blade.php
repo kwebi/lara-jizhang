@@ -2,17 +2,17 @@
 @section('title', '账单列表')
 
 @section('content')
-<div class="overflow-x-auto w-full">
-        
+<div class="container px-4 py-8 mx-auto">
+    <div class="mx-auto max-w-4xl">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">记账</h1>
+            <a href="{{ route('transactions.index') }}" class="text-blue-600 hover:text-blue-800">
+                ← 返回列表
+            </a>
+        </div>
 
-<div class=" flex justify-items-end">
-  <button class="btn btn-primary"><a href="{{ route('transactions.create') }}" class="">
-            新建
-        </a></button>
-  <button class="btn btn-accent">Button</button>
-  <button class="btn btn-secondary">Button</button>
-</div>
-  <table class="table w-full">
+        <div class="p-6 bg-white rounded-lg shadow-md">
+            <table class="table w-full">
     <!-- head -->
     <thead>
       <tr>
@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-        @forelse  ($transactions as $transaction)
+        
         <!-- row 1 -->
       <tr>
         <th>
@@ -66,11 +66,6 @@
         </th>
       </tr>    
         
-        
-  @empty
-        
-  @endforelse
-         
     </tbody>
     <!-- foot -->
     <tfoot>
@@ -84,14 +79,9 @@
     </tfoot>
     
   </table>
+        </div>
+    </div>
 </div>
-  
-  <div class="btn-group">
-    <button class="btn">1</button>
-    <button class="btn btn-active">2</button>
-    <button class="btn">3</button>
-    <button class="btn">4</button>
-  </div>
 @endsection
 
 

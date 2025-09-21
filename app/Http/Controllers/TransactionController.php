@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Account;
 use App\Models\Member;
 use App\Models\Tag;
+use Illuminate\Container\Attributes\Auth;
 use Intertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,9 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $transactions = Transaction::with(['category', 'account', 'member', 'tag'])
-            ->where('user_id', $request->user())->paginate(15)->withQueryString();
+            ->where('user_id', $request->user()->id)->paginate(15)->withQueryString();
         // dump("transactions.index");
-        return view('transactions.index', compact('transactions'))->with('name','nihao');
+        return view('transactions.index', compact('transactions'));
     }
 
     public function create()
@@ -32,10 +33,10 @@ class TransactionController extends Controller
     }
     public function store(TransactionRequest $request)
     {
-        $data['user_id'] = $request->user();
-
+                
+        $data = $request->validated();
+        $data['user_id'] = $request->user()->id;
         Transaction::create($data);
-
         return redirect()->route('transactions.index')->with('success', '交易记录创建成功');
     }
     public function show(Transaction $transaction)
@@ -45,15 +46,17 @@ class TransactionController extends Controller
 
     public function edit(Transaction $transaction)
     {
-        $catagories = Category::all();
+        $categories = Category::all();
         $accounts = Account::all();
         $members = Member::all();
         $tags = Tag::all(); 
-        return view('transactions.edit', compact('transaction','catagories','accounts','members','tags'));
+        // dd($transaction);
+        return view('transactions.edit', compact('transaction','categories','accounts','members','tags'));
     }
     public function update(TransactionRequest $request, Transaction $transaction)
     {
         $data = $request->validated();
+        // dd($data);
         $transaction->update($data);
 
         return redirect()->route('transactions.index')->with('success', '交易记录更新成功');
