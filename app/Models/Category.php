@@ -51,4 +51,16 @@ class Category extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    // 只获取一级分类的本地作用域
+    public function scopeRoot($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+    
+    // 只获取二级分类的本地作用域
+    public function scopeChild($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
 }

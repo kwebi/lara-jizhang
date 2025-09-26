@@ -16,11 +16,13 @@ class CategoriesSeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
+            'id' => 1,
             'user_id' => 1,
             'name' => '餐饮',
             'type' => 'expense',
         ]);
         DB::table('categories')->insert([
+            'id' => 2,
             'user_id' => 1,
             'name' => '交通',
             'type' => 'expense',

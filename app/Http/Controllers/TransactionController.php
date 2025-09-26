@@ -18,9 +18,13 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $transactions = Transaction::with(['category', 'account', 'member', 'tag'])
-            ->where('user_id', $request->user()->id)->paginate(15)->withQueryString();
+            ->where('user_id', $request->user()->id)->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
         // dump("transactions.index");
-        return view('transactions.index', compact('transactions'));
+        $groupedTransactions = $transactions->groupBy(function ($item) {
+            return $item->time->format('Y-m-d');
+        });
+        // dd($groupedTransactions);
+        return view('transactions.index', compact('transactions', 'groupedTransactions'));
     }
 
     public function create()

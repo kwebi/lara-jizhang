@@ -33,5 +33,25 @@ class TransactionsSeeder extends Seeder
             'time' => now(),
             'note' => '水果',
         ]);
+        DB::table('transactions')->insert([
+            'user_id' => 1,
+            'amount' => 118.00,
+            'type' => 'expense',
+            'account_id' => 1,
+            'category_id' => 2,
+            'member_id' => null,
+            'time' => now()->subDays(2),
+            'note' => '打车',
+        ]);
+        DB::table('transactions')->insert([
+            'user_id' => 1,
+            'amount' => 28.00,
+            'type' => 'expense',
+            'account_id' => 1,
+            'category_id' => 2,
+            'member_id' => null,
+            'time' => now()->subDays(2),
+            'note' => '打车',
+        ]);
     }
 }

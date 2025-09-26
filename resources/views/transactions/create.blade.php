@@ -105,7 +105,7 @@
                     @php
                     $time = date('Y-m-d h:m:s');
                     @endphp
-                    <input type="text" value="{{ $time }}" id="time" name="time" 
+                    <input type="date" value="{{ $time }}" id="time" name="time" 
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 @error('time') border-red-500 @enderror">
                     
                     @error('time')

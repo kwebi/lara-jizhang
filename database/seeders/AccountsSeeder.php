@@ -14,12 +14,14 @@ class AccountsSeeder extends Seeder
     public function run(): void
     {
         DB::table('accounts')->insert([
+            'id' => 1,
             'user_id' => 1,
             'name' => '现金',
             'type' => 'cash',
             'balance' => 0,
         ]);
         DB::table('accounts')->insert([
+            'id' => 2,
             'user_id' => 1,
             'name' => '支付宝',
             'type' => 'alipy',

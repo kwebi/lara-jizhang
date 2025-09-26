@@ -2,34 +2,18 @@
 @section('title', '账单列表')
 
 @section('content')
-<div class="overflow-x-auto w-full">
-        
 
-<div class=" flex justify-items-end">
-  <button class="btn btn-primary"><a href="{{ route('transactions.create') }}" class="">
-            新建
-        </a></button>
-  <button class="btn btn-accent">Button</button>
-  <button class="btn btn-secondary">Button</button>
-</div>
-  <table class="table w-full">
-    <!-- head -->
-    <thead>
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" class="checkbox" />
-          </label>
-        </th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </thead>
+<div class="overflow-x-auto w-full">
+  <table class="table">
+    
     <tbody>
-        @forelse  ($transactions as $transaction)
+        @forelse  ($groupedTransactions as $createTime => $transactions)
+        <tr>
+            <th class="text-xs font-medium opacity-90">{{ $createTime }}</th>
+        </tr>
+        
         <!-- row 1 -->
+        @foreach($transactions as $transaction)
       <tr>
         <th>
           <label>
@@ -37,60 +21,41 @@
           </label>
         </th>
         <td>
-          <div class="flex items-center space-x-3">
+          <div class="flex items-center gap-3">
             <div class="avatar">
-              <div class="mask mask-squircle w-12 h-12">
-                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+              <div class="mask mask-squircle h-12 w-12">
+                <img
+                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                  alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             <div>
-              <div class="font-bold">{{ $transaction->amount }}</div>
+              <div class="font-medium text-lg">{{ $transaction->category->name }}</div>
+              <div class="font-light text-sm">{{ $transaction->note ?? ' ' }} </div>
+              <div class="text-xs opacity-50">{{ $transaction->account->name}}  {{ $transaction->tag->name ?? '  ' }}</div>
             </div>
           </div>
         </td>
-        <td>
-          {{ $transaction->category->name ?? 'No Category' }}
-          <br/>
-          <span class="badge badge-ghost badge-sm">  {{ $transaction->tag->name ?? 'No Tag' }}</span>
-        </td>
-        <td>{{ $transaction->note ?? '无备注' }}</td>
-        <td>{{ $transaction->account->name ?? 'No Account' }}</td>
-        <td>{{ $transaction->member->name ?? 'No Member' }}</td>
-        <th>
-          <button class="btn btn-ghost btn-xs"> {{ $transaction->time }} </button>
-        </th>
-        <th>
-          <button class="btn btn-ghost btn-xs"> <a href="{{ route('transactions.edit',$transaction) }}" class="">
-            编辑
-        </a> </button>
-        </th>
-      </tr>    
-        
-        
-  @empty
-        
-  @endforelse
-         
-    </tbody>
-    <!-- foot -->
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
+        <td>{{ $transaction->amount }}</td>
       </tr>
-    </tfoot>
+      @endforeach
+      
+      @empty
+      
+      @endforelse
+    </tbody>
     
   </table>
 </div>
-  
+
   <div class="btn-group">
-    <button class="btn">1</button>
-    <button class="btn btn-active">2</button>
-    <button class="btn">3</button>
-    <button class="btn">4</button>
+    <button class="btn">流水</button>
+    <button class="btn">报表</button>
+    <a href="{{route('transactions.create')}}">
+      <button class="btn" >记一笔 </button>
+    </a>
+    <button class="btn">成员</button>
+    <button class="btn">设置</button>
   </div>
 @endsection
 

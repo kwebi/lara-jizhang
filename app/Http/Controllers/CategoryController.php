@@ -18,7 +18,7 @@ class CategoryController extends Controller
     
     public function create()
     {
-        $parents = Category::roots()->ordered()->get();
+        $parents = Category::root()->orderBy('name')->get();
         return view('categories.create', compact('parents'));
     }
 
@@ -32,7 +32,7 @@ class CategoryController extends Controller
     {
         $parents = Category::whereNull('parent_id')
             ->where('id', '!=', $category->id)
-            ->ordered()->get();
+            ->orderBy('name')->get();
         return view('categories.edit', compact('category', 'parents'));
     }
 
