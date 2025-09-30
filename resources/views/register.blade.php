@@ -1,55 +1,124 @@
+@extends('layouts.app')
+@section('title', '账单列表')
 
-<x-layout>
-  <x-slot:header>用户注册</x-slot:header>
-<div class="flex flex-col justify-center px-6 py-12 min-h-full lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img class="mx-auto w-auto h-10" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-    <h2 class="mt-10 font-bold tracking-tight text-center text-gray-900 text-2xl/9">注 册 账 户</h2>
-  </div>
-
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="/register" method="POST">
-      <label class="input input-bordered flex items-center gap-2 @error('email') input-error @enderror">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
-          <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-          <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-        </svg>
-          <input type="text" class="grow" placeholder="邮箱" name="email" value='{{ old("email") }}' />
-      </label>
-      @error('email')
-      <div class="text-white alert alert-error">{{ $message }}</div>
-      @enderror
-      <label class="input input-bordered flex items-center gap-2 @error('name') input-error @enderror">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
-          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-        </svg>
-          <input type="text" class="grow" placeholder="用户名" name="name" value='{{ old("name") }}' />
-      </label>
-      @error('name')
-      <div class="text-white alert alert-error">{{ $message }}</div>
-      @enderror
-      <label class="input input-bordered flex items-center gap-2 @error('password') input-error @enderror">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
-          <path
-            fill-rule="evenodd"
-            d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-            clip-rule="evenodd" />
-        </svg>
-        <input type="password" class="grow" name="password" placeholder="密码" />
-      </label>
-      @error('password')
-      <div class="text-white alert alert-error">{{ $message }}</div>
-      @enderror
-
-      <div>
-        <button
-          type="submit"
-          class="flex justify-center px-3 py-1.5 w-full font-semibold text-white bg-indigo-600 rounded-md shadow-sm text-sm/6 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          注 册
-        </button>
+@section('content')
+<style>
+.demo-reg-container{width: 320px; margin: 21px auto 0;}
+.demo-reg-other .layui-icon{position: relative; display: inline-block; margin: 0 2px; top: 2px; font-size: 26px;}
+</style>
+<form class="layui-form" action="/register" method="POST">
+  @csrf
+  <div class="demo-reg-container">
+    <div class="layui-form-item">
+      <div class="layui-input-wrap">
+        <div class="layui-input-prefix">
+          <i class="layui-icon layui-icon-email"></i>
+        </div>
+        <input type="text" name="email" value="" lay-verify="required|email" placeholder="邮箱" lay-reqtext="请填写邮箱" autocomplete="off" class="layui-input" id="reg-email">
       </div>
-      @csrf
-    </form>
+      
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-wrap">
+        <div class="layui-input-prefix">
+          <i class="layui-icon layui-icon-password"></i>
+        </div>
+        <input type="password" name="password" value="" lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input" id="reg-password" lay-affix="eye">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-wrap">
+        <div class="layui-input-prefix">
+          <i class="layui-icon layui-icon-password"></i>
+        </div>
+        <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword" placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-wrap">
+        <div class="layui-input-prefix">
+          <i class="layui-icon layui-icon-username"></i>
+        </div>
+        <input type="text" name="name" value="" lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input" lay-affix="clear">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <input type="checkbox" name="agreement" lay-verify="required" lay-skin="primary" title="同意"> 
+      <a href="#terms" target="_blank" style="position: relative; top: 6px; left: -15px;">
+        <ins>用户协议</ins>
+      </a>
+    </div>
+    <div class="layui-form-item">
+      <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-reg">注册</button>
+    </div>
+    <div class="layui-form-item demo-reg-other">
+      <label>社交账号注册</label>
+      <span style="padding: 0 21px 0 6px;">
+        <a href="javascript:;"><i class="layui-icon layui-icon-login-qq" style="color: #3492ed;"></i></a>
+        <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat" style="color: #4daf29;"></i></a>
+        <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo" style="color: #cf1900;"></i></a>
+      </span>
+      <a href="#login">登录已有帐号</a>
+    </div>
   </div>
-</div>
-</x-layout>
+</form>
+  @endsection
+
+
+@section('scriptsAfterJs')
+  <script>
+layui.use(function(){
+  var $ = layui.$;
+  var form = layui.form;
+  var layer = layui.layer;
+  var util = layui.util;
+  
+  // 自定义验证规则
+  form.verify({
+    // 确认密码
+    confirmPassword: function(value, item){
+      var passwordValue = $('#reg-password').val();
+      if(value !== passwordValue){
+        return '两次密码输入不一致';
+      }
+    }
+  });
+  
+  // 提交事件
+  form.on('submit(demo-reg)', function(data){
+    var field = data.field; // 获取表单字段值
+    // 是否勾选同意
+    if(!field.agreement){
+      layer.msg('您必须勾选同意用户协议才能注册');
+      return false;
+    }
+    
+    // 显示填写结果，仅作演示用
+    // layer.alert(JSON.stringify(field), {
+    //   title: '当前填写的字段值'
+    // });
+    
+    // 此处可执行 Ajax 等操作
+    // …
+    
+    return true; // 阻止默认 form 跳转
+  });
+  
+  // 普通事件
+  util.on('lay-on', {
+    // 获取验证码
+    'reg-get-vercode': function(othis){
+      var isvalid = form.validate('#reg-email'); // 主动触发验证，v2.7.0 新增 
+      // 验证通过
+      if(isvalid){
+        layer.msg('手机号规则验证通过');
+        // 此处可继续书写「发送验证码」等后续逻辑
+        // …
+      }
+    }
+  });
+});
+</script>
+
+@endsection
+

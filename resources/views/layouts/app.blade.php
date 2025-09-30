@@ -8,9 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
      <!-- 样式 -->
     <script src="{{asset('cdn/tailwindcss3.4.js')}}"></script>
-    
-    
-    <link rel="stylesheet" href="{{ asset('cdn/daisyui-full.min.css') }}">
+    <script src="{{asset('layui/layui.js')}}"></script>        
+    <link rel="stylesheet" href="{{ asset('layui/css/layui.css') }}">
     <title>@yield('title', '记账') 记账 </title>
     
 </head>
