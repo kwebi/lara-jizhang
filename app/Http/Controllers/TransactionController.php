@@ -8,8 +8,6 @@ use App\Models\Category;
 use App\Models\Account;
 use App\Models\Member;
 use App\Models\Tag;
-use Illuminate\Container\Attributes\Auth;
-use Intertia\Inertia;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -18,7 +16,7 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $transactions = Transaction::with(['category', 'account', 'member', 'tag'])
-            ->where('user_id', $request->user()->id)->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
+            ->where('user_id', $request->user()->id)->orderBy('time', 'desc')->paginate(15)->withQueryString();
         // dump("transactions.index");
         $groupedTransactions = $transactions->groupBy(function ($item) {
             return $item->time->format('Y-m-d');

@@ -22,7 +22,10 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'type' => 'required|in:income,expense',
+            'name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:categories,id',
+            'icon' => 'nullable|string|max:255',
         ];
     }
 }
