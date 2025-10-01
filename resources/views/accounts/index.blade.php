@@ -30,7 +30,7 @@
         <a href="{{ route('categories.edit', $category) }}" class="layui-btn layui-btn-xs">编辑</a>
         
         <!-- 删除按钮 - 触发删除表单 -->
-        <button lay-on="test-confirm" id="{{ $category->id }}"
+        <button onclick="confirmDelete({{ $category->id }})" 
                 class="layui-btn layui-btn-danger layui-btn-xs">删除</button>
         
         <!-- 隐藏的删除表单 -->
@@ -54,7 +54,7 @@
            <!-- 编辑按钮 - 跳转到编辑页面 -->
           <a href="{{ route('categories.edit', $child) }}" class="layui-btn layui-btn-xs">编辑</a>
           <!-- 删除按钮 - 触发删除表单 -->
-          <button lay-on="test-confirm" id="{{ $child->id }}"
+          <button lay-on="test-confirm"
                 class="layui-btn layui-btn-danger layui-btn-xs">删除</button>
           <!-- 隐藏的删除表单 -->
           <form id="delete-form-{{ $child->id }}" 
@@ -103,9 +103,8 @@
   // 事件
   util.on('lay-on', {
     "test-confirm": function(){
-      var id = this.id
       layer.confirm('确定要删除这个分类吗？此操作不可恢复！', {icon: 3}, function(){
-        document.getElementById('delete-form-' + id).submit();
+        document.getElementById('delete-form-' + categoryId).submit();
         layer.msg('点击确定的回调', {icon: 1});
       }, function(){
         layer.msg('点击取消的回调');
