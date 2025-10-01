@@ -8,6 +8,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return to_route('transactions.index');
@@ -42,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
     
     // 标签管理
     Route::resource('tags', TagController::class);
+
+    //用户管理
+    Route::resource('users', UserController::class);
     
     // 统计报表
     // Route::get('/reports', [TransactionController::class, 'reports'])->name('reports');

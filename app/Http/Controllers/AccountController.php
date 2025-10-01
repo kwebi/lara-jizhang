@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AccountRequest;
 use Illuminate\Http\Request;
 use App\Models\Account;
-use Illuminate\Auth\Events\Validated;
 
 class AccountController extends Controller
 {

@@ -4,6 +4,7 @@
   @if(auth()->user())
   <li class="layui-nav-item" ><a href="{{route('categories.index')}}">分类</a></li>
   <li class="layui-nav-item" ><a href="{{route('accounts.index')}}">账户</a></li>
+    <li class="layui-nav-item" ><a href="{{route('users.index')}}">用户</a></li>
   <li class="layui-nav-item">
     <a href="javascript:;">{{ auth()->user()?->name }}</a>
   </li>

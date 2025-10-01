@@ -32,6 +32,9 @@
           <i class="layui-icon layui-icon-password"></i>
         </div>
         <input type="password" name="confirmPassword" value="" lay-verify="required|confirmPassword" placeholder="确认密码" autocomplete="off" class="layui-input" lay-affix="eye">
+        @error('password')
+          <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+        @enderror
       </div>
     </div>
     <div class="layui-form-item">

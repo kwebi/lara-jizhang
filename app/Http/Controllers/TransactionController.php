@@ -11,6 +11,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Resources\TransactionResource;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 
 class TransactionController extends Controller
@@ -50,10 +51,10 @@ class TransactionController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $accounts = Account::all();
-        $members = Member::all();
-        $tags = Tag::all(); 
+        $categories = Category::where('user_id', Auth::user()->id)->get();
+        $accounts = Account::where('user_id', Auth::user()->id)->get();
+        $members = Member::where('user_id', Auth::user()->id)->get();
+        $tags = Tag::all();
         return view('transactions.create',compact('categories','accounts','members','tags'));
     }
     public function store(TransactionRequest $request)
@@ -71,10 +72,10 @@ class TransactionController extends Controller
 
     public function edit(Transaction $transaction)
     {
-        $categories = Category::all();
-        $accounts = Account::all();
-        $members = Member::all();
-        $tags = Tag::all(); 
+        $categories = Category::where('user_id', Auth::user()->id)->get();
+        $accounts = Account::where('user_id', Auth::user()->id)->get();
+        $members = Member::where('user_id', Auth::user()->id)->get();
+        $tags = Tag::all();
         // dd($transaction);
         return view('transactions.edit', compact('transaction','categories','accounts','members','tags'));
     }
