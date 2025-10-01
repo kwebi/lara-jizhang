@@ -20,7 +20,7 @@ class TransactionsSeeder extends Seeder
             'account_id' => 1,
             'category_id' => 1,
             'member_id' => null,
-            'time' => now(),
+            'time' => now()->subDays(random_int(1, 600)),
             'note' => '午餐',
         ]);
         DB::table('transactions')->insert([
@@ -30,7 +30,7 @@ class TransactionsSeeder extends Seeder
             'account_id' => 1,
             'category_id' => 1,
             'member_id' => null,
-            'time' => now(),
+            'time' => now()->subDays(random_int(1, 600)),
             'note' => '水果',
         ]);
         DB::table('transactions')->insert([
@@ -40,7 +40,7 @@ class TransactionsSeeder extends Seeder
             'account_id' => 1,
             'category_id' => 2,
             'member_id' => null,
-            'time' => now()->subDays(2),
+            'time' => now()->subDays(random_int(1, 600)),
             'note' => '打车',
         ]);
         DB::table('transactions')->insert([
@@ -50,7 +50,7 @@ class TransactionsSeeder extends Seeder
             'account_id' => 1,
             'category_id' => 2,
             'member_id' => null,
-            'time' => now()->subDays(2),
+            'time' => now()->subDays(random_int(1,600)),
             'note' => '打车',
         ]);
     }

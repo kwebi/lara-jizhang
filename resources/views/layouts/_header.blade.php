@@ -1,7 +1,9 @@
-<ul class="layui-nav layui-bg-cyan flex">
+<ul class="layui-nav flex">
   <li class="layui-nav-item"><a href="{{route('transactions.index')}}">首页</a></li>
   
   @if(auth()->user())
+  <li class="layui-nav-item" ><a href="{{route('categories.index')}}">分类</a></li>
+
   <li class="layui-nav-item">
     <a href="javascript:;">{{ auth()->user()?->name }}</a>
   </li>

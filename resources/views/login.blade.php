@@ -1,6 +1,6 @@
 
 @extends('layouts.app')
-@section('title', '注册')
+@section('title', '登录')
 
 @section('content')
 <style>
