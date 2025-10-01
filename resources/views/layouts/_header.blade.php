@@ -1,4 +1,4 @@
-<ul class="layui-nav flex">
+<ul class="layui-nav">
   <li class="layui-nav-item"><a href="{{route('transactions.index')}}">首页</a></li>
   
   @if(auth()->user())
